@@ -28,9 +28,9 @@ body {
     align-items: center;
     flex-direction: column;
     z-index: 999;
-    overflow: hidden;
 }
 
+/* Buton */
 #intro button {
     padding: 12px 30px;
     border: none;
@@ -46,22 +46,6 @@ body {
     background: #f7e6d0;
 }
 
-/* Uçan yapraklar */
-.leaf {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: url('https://i.ibb.co/y8hP8Qr/flower.png') no-repeat center center;
-    background-size: contain;
-    opacity: 0.7;
-    animation: floatUp linear infinite;
-}
-@keyframes floatUp {
-    0% { transform: translateY(100vh) rotate(0deg); opacity:0; }
-    10% { opacity:1; }
-    100% { transform: translateY(-100vh) rotate(360deg); opacity:0; }
-}
-
 /* Yazı animasyonu */
 .typing {
     overflow: hidden;
@@ -73,15 +57,20 @@ body {
     animation: typing 3s steps(30,end) forwards, blink .8s infinite;
     margin-bottom: 10px;
 }
+.typing2 {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #444;
+    width: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    animation: typing2 2s steps(30,end) forwards, blink2 .8s infinite;
+    margin-bottom: 20px;
+}
 @keyframes typing { to { width: 100%; } }
 @keyframes blink { 50% { border-color: transparent; } }
-
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    animation-delay: 3s;
-}
-@keyframes fadeIn { to { opacity:1; } }
+@keyframes typing2 { to { width: 100%; } }
+@keyframes blink2 { 50% { border-color: transparent; } }
 
 .section {
     padding: 60px 20px;
@@ -125,21 +114,9 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 <!-- Giriş ekranı -->
 <div id="intro">
     <div class="typing">Ayten & Kadir</div>
-    <div class="fade-in">Nişanımıza Davetlisiniz</div>
+    <div class="typing2">Nişanımıza Davetlisiniz</div>
     <button onclick="startSite()">Daveti Aç 💌</button>
 </div>
-
-<!-- Çiçek yaprakları -->
-<script>
-for(let i=0;i<15;i++){
-    let leaf = document.createElement('div');
-    leaf.classList.add('leaf');
-    leaf.style.left = Math.random()*100 + 'vw';
-    leaf.style.animationDuration = (5+Math.random()*10)+'s';
-    leaf.style.animationDelay = Math.random()*5+'s';
-    document.body.appendChild(leaf);
-}
-</script>
 
 <!-- Müzik -->
 <audio id="music" loop>
@@ -180,7 +157,7 @@ for(let i=0;i<15;i++){
 </div>
 
 <script>
-// intro + müzik + yumuşak geçiş
+// intro + müzik + geçiş
 function startSite(){
     document.getElementById("intro").style.transition = "all 1s ease";
     document.getElementById("intro").style.opacity = "0";
