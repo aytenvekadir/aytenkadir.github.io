@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+/* GENEL */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -15,10 +16,10 @@ body {
     color: #444;
     text-align: center;
     overflow-x: hidden;
-    min-height: 100vh;
-    overflow: hidden; /* intro açıkken scroll kapalı */
+    overflow: hidden; /* Başlangıçta intro açıkken scroll kapalı */
 }
 
+/* Giriş ekranı */
 #intro {
     position: fixed;
     top: 0;
@@ -35,6 +36,7 @@ body {
     transition: opacity 0.8s ease;
 }
 
+/* Buton */
 #intro button {
     padding: 12px 30px;
     border: none;
@@ -50,6 +52,7 @@ body {
     background: #f7e6d0;
 }
 
+/* Yazı animasyonu */
 .typing {
     overflow: hidden;
     white-space: nowrap;
@@ -75,19 +78,21 @@ body {
 @keyframes typing2 { to { width: 100%; } }
 @keyframes blink2 { 50% { border-color: transparent; } }
 
-.section {
+/* Başlangıçta içerik gizli */
+.hero, .section {
+    display: none;
     padding: 60px 20px;
     opacity: 0;
     transform: translateY(30px);
     transition: 1s ease;
+    min-height: 100vh; /* Android’de görünürlük için */
 }
-.section.show {
+.section.show, .hero.show {
     opacity: 1;
     transform: translateY(0);
 }
 
 .hero {
-    height: 100vh;
     background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9)),
     url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600') center/cover;
     display: flex;
@@ -114,16 +119,19 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <body>
 
+<!-- Intro ekranı -->
 <div id="intro">
     <div class="typing">Ayten & Kadir</div>
     <div class="typing2">Nişanımıza Davetlisiniz</div>
     <button onclick="startSite()">Daveti Aç 💌</button>
 </div>
 
+<!-- Müzik -->
 <audio id="music" loop>
   <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Site içeriği -->
 <div class="hero section">
     <h1>Ayten & Kadir</h1>
     <p>18 Nisan 2026 • 18:00</p>
@@ -157,7 +165,7 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 </div>
 
 <script>
-// intro + müzik + scroll
+// Intro kapatma ve içerik açma
 function startSite() {
     const intro = document.getElementById("intro");
     intro.style.opacity = "0";
@@ -165,10 +173,17 @@ function startSite() {
     setTimeout(() => {
         intro.style.display = "none";
 
+        // içerikleri görünür yap
+        const sections = document.querySelectorAll('.hero, .section');
+        sections.forEach(sec => {
+            sec.style.display = "block";
+            sec.classList.add('show');
+        });
+
         // scroll aç
         document.body.style.overflow = "auto";
 
-        // Android scroll reflow
+        // Android için reflow
         document.body.style.transform = "scale(1)";
 
         // sayfa başına scroll
@@ -179,8 +194,8 @@ function startSite() {
     document.getElementById("music").play();
 }
 
-// scroll animasyon
-const sections = document.querySelectorAll('.section');
+// Scroll animasyon
+const sections = document.querySelectorAll('.section, .hero');
 window.addEventListener('scroll', () => {
     sections.forEach(sec => {
         const top = sec.getBoundingClientRect().top;
@@ -190,7 +205,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// countdown
+// Countdown
 const countdown = () => {
     const target = new Date("2026-04-18T18:00:00").getTime();
     const now = new Date().getTime();
