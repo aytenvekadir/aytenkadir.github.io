@@ -159,9 +159,14 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 <script>
 // intro + müzik + geçiş
 function startSite(){
-    document.getElementById("intro").style.transition = "all 1s ease";
-    document.getElementById("intro").style.opacity = "0";
-    setTimeout(()=>{ document.getElementById("intro").style.display = "none"; }, 1000);
+    const intro = document.getElementById("intro");
+    intro.style.transition = "all 1s ease";
+    intro.style.opacity = "0";
+    setTimeout(()=>{ 
+        intro.style.display = "none"; 
+        document.body.style.overflow = "auto"; // <<< BURASI EKLENDİ
+        window.scrollTo(0,0); // <<< sayfa başına scroll
+    }, 1000);
     document.getElementById("music").play();
 }
 
