@@ -16,6 +16,45 @@ body {
     text-align: center;
 }
 
+/* Giriş ekranı */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #fdfaf6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+}
+
+#intro button {
+    padding: 12px 25px;
+    border: none;
+    background: #e8d8c3;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Yazı animasyonu */
+.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #444;
+    width: 0;
+    animation: typing 3s steps(30, end) forwards, blink .8s infinite;
+}
+
+@keyframes typing {
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
 .section {
     padding: 60px 20px;
     opacity: 0;
@@ -28,16 +67,6 @@ body {
     transform: translateY(0);
 }
 
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-h2 {
-    font-weight: 300;
-}
-
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9)),
@@ -47,8 +76,13 @@ h2 {
     justify-content: center;
 }
 
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+}
+
 .countdown {
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 20px;
 }
 
@@ -66,17 +100,18 @@ h2 {
 iframe {
     width: 100%;
     height: 300px;
-    border: none;
     border-radius: 10px;
+    border: none;
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
     background: #e8d8c3;
-    cursor: pointer;
     border-radius: 20px;
-    margin-top: 20px;
+    text-decoration: none;
+    color: #333;
+    margin-top: 15px;
 }
 
 </style>
@@ -84,19 +119,21 @@ button {
 
 <body>
 
+<!-- Giriş ekranı -->
+<div id="intro">
+    <h2>Ayten & Kadir</h2>
+    <button onclick="startSite()">Daveti Aç 💌</button>
+</div>
+
 <!-- Müzik -->
 <audio id="music" loop>
-  <source src="https://www.myinstants.com/media/sounds/imperial-march-star-wars.mp3" type="audio/mp3">
+  <source src="https://www.myinstants.com/media/sounds/imperial-march-star-wars.mp3">
 </audio>
 
-<div class="hero section show">
-    <h1>Ayten & Kadir</h1>
-    <h2>Nişanımıza Davetlisiniz</h2>
+<div class="hero section">
+    <h1 class="typing">Ayten & Kadir</h1>
     <p>18 Nisan 2026 • 18:00</p>
-
     <div class="countdown" id="countdown"></div>
-
-    <button onclick="playMusic()">Müziği Başlat</button>
 </div>
 
 <div class="section">
@@ -111,18 +148,36 @@ button {
 
 <div class="section">
     <h1>Mekan</h1>
-    <p>Meydan Pera Davet Evi</p>
+
+    <p><b>Meydan Pera Davet Evi</b></p>
+    <p>Halkalı Merkez Mahallesi, 1. İkitelli Caddesi,<br>
+    Meydan, Halkalı AVM C No:2/2b,<br>
+    Küçükçekmece / İstanbul</p>
+
+    <a class="btn" target="_blank"
+    href="https://www.google.com/maps?q=Meydan+Pera+Davet+Evi">
+    Yol Tarifi Al
+    </a>
+
+    <p style="margin-top:15px;">📞 05XX XXX XX XX</p>
+
     <iframe src="https://www.google.com/maps?q=Meydan+Pera+Davet+Evi&output=embed"></iframe>
 </div>
 
 <div class="section">
     <h1>Biz</h1>
-    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" width="80%" style="border-radius: 20px;">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" width="80%" style="border-radius:20px;">
 </div>
 
 <script>
 
-// Scroll animasyon
+// intro + müzik
+function startSite(){
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("music").play();
+}
+
+// scroll animasyon
 const sections = document.querySelectorAll('.section');
 window.addEventListener('scroll', () => {
     sections.forEach(sec => {
@@ -133,7 +188,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Countdown
+// countdown
 const countdown = () => {
     const target = new Date("2026-04-18T18:00:00").getTime();
     const now = new Date().getTime();
@@ -148,11 +203,6 @@ const countdown = () => {
 }
 
 setInterval(countdown, 1000);
-
-// Müzik
-function playMusic(){
-    document.getElementById("music").play();
-}
 
 </script>
 
