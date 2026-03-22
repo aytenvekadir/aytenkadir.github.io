@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+/* GENEL */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -15,11 +16,15 @@ body {
     color: #444;
     text-align: center;
     overflow-x: hidden;
+    min-height: 100vh; /* Android scroll sorunları için */
+    overflow: hidden; /* Başlangıçta intro için scroll kapalı */
 }
 
 /* Giriş ekranı */
 #intro {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(to bottom, #fdfaf6, #fff1e6);
@@ -28,7 +33,8 @@ body {
     align-items: center;
     flex-direction: column;
     z-index: 999;
-    overflow:hidden;
+    overflow: hidden;
+    transition: opacity 1s ease;
 }
 
 /* Buton */
@@ -121,7 +127,7 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <!-- Müzik -->
 <audio id="music" loop>
-  <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3">
+  <source src="https://www.myinstants.com/media/sounds/imperial-march-star-wars.mp3">
 </audio>
 
 <!-- Site içeriği -->
@@ -159,15 +165,23 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <script>
 // intro + müzik + geçiş
-function startSite(){
+function startSite() {
     const intro = document.getElementById("intro");
-    intro.style.transition = "all 1s ease";
     intro.style.opacity = "0";
-    setTimeout(()=>{ 
-        intro.style.display = "none"; 
-        document.body.style.overflow = "auto"; // <<< BURASI EKLENDİ
-        window.scrollTo(0,0); // <<< sayfa başına scroll
+
+    setTimeout(() => {
+        intro.style.display = "none";
+
+        // scroll'u aç
+        document.body.style.overflow = "auto";
+
+        // Android tarayıcılar için repaint tetikleme
+        document.body.style.position = "relative";
+
+        // sayfa başına scroll
+        window.scrollTo(0, 0);
     }, 1000);
+
     document.getElementById("music").play();
 }
 
