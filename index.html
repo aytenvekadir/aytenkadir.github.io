@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-/* GENEL */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -16,11 +15,10 @@ body {
     color: #444;
     text-align: center;
     overflow-x: hidden;
-    min-height: 100vh; /* Android scroll sorunları için */
-    overflow: hidden; /* Başlangıçta intro için scroll kapalı */
+    min-height: 100vh;
+    overflow: hidden; /* intro açıkken scroll kapalı */
 }
 
-/* Giriş ekranı */
 #intro {
     position: fixed;
     top: 0;
@@ -37,7 +35,6 @@ body {
     transition: opacity 0.8s ease;
 }
 
-/* Buton */
 #intro button {
     padding: 12px 30px;
     border: none;
@@ -53,7 +50,6 @@ body {
     background: #f7e6d0;
 }
 
-/* Yazı animasyonu */
 .typing {
     overflow: hidden;
     white-space: nowrap;
@@ -118,19 +114,16 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <body>
 
-<!-- Giriş ekranı -->
 <div id="intro">
     <div class="typing">Ayten & Kadir</div>
     <div class="typing2">Nişanımıza Davetlisiniz</div>
     <button onclick="startSite()">Daveti Aç 💌</button>
 </div>
 
-<!-- Müzik -->
 <audio id="music" loop>
-  <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3">
+  <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Site içeriği -->
 <div class="hero section">
     <h1>Ayten & Kadir</h1>
     <p>18 Nisan 2026 • 18:00</p>
@@ -164,7 +157,7 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 </div>
 
 <script>
-// intro + müzik + geçiş
+// intro + müzik + scroll
 function startSite() {
     const intro = document.getElementById("intro");
     intro.style.opacity = "0";
@@ -175,14 +168,14 @@ function startSite() {
         // scroll aç
         document.body.style.overflow = "auto";
 
-        // Android’de scroll için küçük reflow tetikle
+        // Android scroll reflow
         document.body.style.transform = "scale(1)";
 
         // sayfa başına scroll
-        window.scrollTo(0,0);
+        setTimeout(()=>{ window.scrollTo(0,0); }, 50);
     }, 500);
 
-    // Müzik eski gibi sorunsuz çalıyor
+    // müzik çal
     document.getElementById("music").play();
 }
 
