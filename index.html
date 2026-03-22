@@ -34,7 +34,7 @@ body {
     flex-direction: column;
     z-index: 999;
     overflow: hidden;
-    transition: opacity 1s ease;
+    transition: opacity 0.8s ease;
 }
 
 /* Buton */
@@ -127,7 +127,7 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <!-- Müzik -->
 <audio id="music" loop>
-  <source src="https://www.myinstants.com/media/sounds/imperial-march-star-wars.mp3">
+  <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3">
 </audio>
 
 <!-- Site içeriği -->
@@ -172,16 +172,17 @@ function startSite() {
     setTimeout(() => {
         intro.style.display = "none";
 
-        // scroll'u aç
+        // scroll aç
         document.body.style.overflow = "auto";
 
-        // Android tarayıcılar için repaint tetikleme
-        document.body.style.position = "relative";
+        // Android’de scroll için küçük reflow tetikle
+        document.body.style.transform = "scale(1)";
 
         // sayfa başına scroll
-        window.scrollTo(0, 0);
-    }, 1000);
+        window.scrollTo(0,0);
+    }, 500);
 
+    // Müzik eski gibi sorunsuz çalıyor
     document.getElementById("music").play();
 }
 
