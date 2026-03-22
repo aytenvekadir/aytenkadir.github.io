@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-/* GENEL */
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -16,12 +15,12 @@ body {
     color: #444;
     text-align: center;
     overflow-x: hidden;
-    overflow: hidden; /* Başlangıçta intro açıkken scroll kapalı */
+    overflow: hidden; /* intro açıkken scroll kapalı */
+    height: 100%;
 }
 
-/* Giriş ekranı */
 #intro {
-    position: fixed;
+    position: absolute; /* FIXED yerine ABSOLUTE */
     top: 0;
     left: 0;
     width: 100%;
@@ -32,11 +31,9 @@ body {
     align-items: center;
     flex-direction: column;
     z-index: 999;
-    overflow: hidden;
     transition: opacity 0.8s ease;
 }
 
-/* Buton */
 #intro button {
     padding: 12px 30px;
     border: none;
@@ -52,7 +49,6 @@ body {
     background: #f7e6d0;
 }
 
-/* Yazı animasyonu */
 .typing {
     overflow: hidden;
     white-space: nowrap;
@@ -80,14 +76,12 @@ body {
 
 /* Başlangıçta içerik gizli */
 .hero, .section {
-    display: none;
-    padding: 60px 20px;
     opacity: 0;
     transform: translateY(30px);
     transition: 1s ease;
-    min-height: 100vh; /* Android’de görünürlük için */
+    min-height: 100vh;
 }
-.section.show, .hero.show {
+.hero.show, .section.show {
     opacity: 1;
     transform: translateY(0);
 }
@@ -119,19 +113,16 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 
 <body>
 
-<!-- Intro ekranı -->
 <div id="intro">
     <div class="typing">Ayten & Kadir</div>
     <div class="typing2">Nişanımıza Davetlisiniz</div>
     <button onclick="startSite()">Daveti Aç 💌</button>
 </div>
 
-<!-- Müzik -->
 <audio id="music" loop>
   <source src="https://archive.org/download/tvtunes_12997/Star Wars - Imperial March.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Site içeriği -->
 <div class="hero section">
     <h1>Ayten & Kadir</h1>
     <p>18 Nisan 2026 • 18:00</p>
@@ -165,7 +156,6 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 </div>
 
 <script>
-// Intro kapatma ve içerik açma
 function startSite() {
     const intro = document.getElementById("intro");
     intro.style.opacity = "0";
@@ -175,26 +165,23 @@ function startSite() {
 
         // içerikleri görünür yap
         const sections = document.querySelectorAll('.hero, .section');
-        sections.forEach(sec => {
-            sec.style.display = "block";
-            sec.classList.add('show');
-        });
+        sections.forEach(sec => sec.classList.add('show'));
 
         // scroll aç
         document.body.style.overflow = "auto";
 
         // Android için reflow
+        document.body.style.height = "auto";
         document.body.style.transform = "scale(1)";
+        window.scrollTo(0,0);
 
-        // sayfa başına scroll
-        setTimeout(()=>{ window.scrollTo(0,0); }, 50);
     }, 500);
 
     // müzik çal
     document.getElementById("music").play();
 }
 
-// Scroll animasyon
+// scroll animasyon
 const sections = document.querySelectorAll('.section, .hero');
 window.addEventListener('scroll', () => {
     sections.forEach(sec => {
@@ -205,7 +192,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Countdown
+// countdown
 const countdown = () => {
     const target = new Date("2026-04-18T18:00:00").getTime();
     const now = new Date().getTime();
