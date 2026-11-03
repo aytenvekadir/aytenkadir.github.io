@@ -9,9 +9,7 @@
 
 <style>
 
-.section + .section {
-    margin-top: 0;
-}
+
     
 body {
     margin: 0;
@@ -74,6 +72,17 @@ body {
     animation: typing2 2s steps(30,end) forwards, blink2 .8s infinite;
     margin-bottom: 20px;
 }
+    .section {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.section + .section {
+    margin-top: 0 !important;
+}
+    
 @keyframes typing { to { width: 100%; } }
 @keyframes blink { 50% { border-color: transparent; } }
 @keyframes typing2 { to { width: 100%; } }
