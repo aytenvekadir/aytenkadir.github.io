@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -9,8 +10,6 @@
 
 <style>
 
-
-    
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -47,6 +46,7 @@ body {
     margin-top: 20px;
     transition: all 0.3s ease;
 }
+
 #intro button:hover {
     transform: scale(1.1);
     background: #f7e6d0;
@@ -62,6 +62,7 @@ body {
     animation: typing 3s steps(30,end) forwards, blink .8s infinite;
     margin-bottom: 10px;
 }
+
 .typing2 {
     overflow: hidden;
     white-space: nowrap;
@@ -72,7 +73,8 @@ body {
     animation: typing2 2s steps(30,end) forwards, blink2 .8s infinite;
     margin-bottom: 20px;
 }
-    .section {
+
+.section {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
     padding-top: 15px !important;
@@ -82,24 +84,27 @@ body {
 .section + .section {
     margin-top: 0 !important;
 }
-    
+
 @keyframes typing { to { width: 100%; } }
 @keyframes blink { 50% { border-color: transparent; } }
 @keyframes typing2 { to { width: 100%; } }
 @keyframes blink2 { 50% { border-color: transparent; } }
 
-/* Başlangıçta içerik gizli ve animasyon */
+/* İçerik animasyonu */
+
 .hero, .section {
     opacity: 0;
     transform: translateY(30px);
     transition: 1s ease;
 }
+
 .hero.show, .section.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Hero ekran tam boy */
+/* Hero ekran */
+
 .hero {
     min-height: 100vh;
     display: flex;
@@ -109,16 +114,64 @@ body {
                 url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1600') center/cover;
 }
 
-/* Section aralıkları düzeltildi */
+/* Bölümler */
+
 .section {
     padding: 50px 20px;
 }
 
-h1 { font-family: 'Playfair Display', serif; font-size: 42px; }
-.countdown { font-size: 22px; margin-top: 20px; }
-.program { max-width: 400px; margin: auto; text-align: left; }
-.program p { border-bottom: 1px solid #ddd; padding: 8px 0; }
-iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+}
+
+.countdown {
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+/* Aşağı yönlü hareketli ok */
+
+.scroll-arrow {
+    font-size: 38px;
+    color: #a88f76;
+    margin-top: 25px;
+    cursor: pointer;
+    animation: arrowBounce 1.5s infinite;
+    transition: color 0.3s ease;
+}
+
+.scroll-arrow:hover {
+    color: #80664e;
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+.program {
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+}
+
+.program p {
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    border: none;
+}
+
 .btn {
     display: inline-block;
     padding: 12px 20px;
@@ -128,6 +181,7 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
     color: #333;
     margin-top: 15px;
 }
+
 </style>
 </head>
 
@@ -140,61 +194,93 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
 </div>
 
 <audio id="music" loop>
-  <source src="https://raw.githubusercontent.com/aytenvekadir/aytenkadir.github.io/main/indila-love-story_nys3RcbM.mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/aytenvekadir/aytenkadir.github.io/main/indila-love-story_nys3RcbM.mp3" type="audio/mpeg">
 </audio>
 
+<!-- GİRİŞ VE GERİ SAYIM -->
+
 <div class="hero section">
+
     <h1>Ayten & Kadir</h1>
+
     <p>23 Ocak 2027 • 19:00</p>
+
     <div class="countdown" id="countdown"></div>
+
+    <!-- AŞAĞI OK -->
+    <div class="scroll-arrow"
+         onclick="document.getElementById('mekan').scrollIntoView({behavior: 'smooth'})">
+        ↓
+    </div>
+
 </div>
 
-<div class="section">
+<!-- MEKAN -->
+
+<div class="section" id="mekan">
+
     <h1>Mekan</h1>
+
     <p><b>Lamore Davet Evi</b></p>
-    <p>Yiğitler Sokak No: 6, Başakşehir / İstanbul<br>
-    Kat 1 Balroom Salon</p>
-    <a class="btn" target="_blank" href="https://www.google.com/maps?q=Lamore+Davet+Evi+Yi%C4%9Fitler+Sokak+No%3A+6+Ba%C5%9Fak%C5%9Fehir+%C4%B0stanbul">Yol Tarifi Al</a>
-   <p style="margin-top:15px;">
-  📞 <a href="tel:+905306445008" style="color: inherit; text-decoration: none;">0530 644 50 08</a>
-</p>
+
+    <p>
+        Yiğitler Sokak No: 6, Başakşehir / İstanbul<br>
+        Kat 1 Balroom Salon
+    </p>
+
+    <a class="btn" target="_blank"
+       href="https://www.google.com/maps?q=Lamore+Davet+Evi+Yi%C4%9Fitler+Sokak+No%3A+6+Ba%C5%9Fak%C5%9Fehir+%C4%B0stanbul">
+        Yol Tarifi Al
+    </a>
+
+    <p style="margin-top:15px;">
+        📞 <a href="tel:+905306445008" style="color: inherit; text-decoration: none;">
+        0530 644 50 08</a>
+    </p>
+
     <iframe src="https://www.google.com/maps?q=Lamore+Davet+Evi+Yi%C4%9Fitler+Sokak+No%3A+6+Ba%C5%9Fak%C5%9Fehir+%C4%B0stanbul&output=embed"></iframe>
+
 </div>
 
+<!-- ULAŞIM -->
 
 <div class="section">
+
     <h1>Ulaşım Seçenekleri</h1>
 
     <h2>Metro ile Ulaşım</h2>
+
     <p>
         M3 metro hattını kullanarak Başak Konutları durağında
         inip kısa bir yürüyüşle ulaşabilirsiniz.
     </p>
 
     <h2>Otobüs ile Ulaşım</h2>
+
     <ul>
-        <li><b>78ZB:</b> Fenertepe Peronlar - Zeytinburnu - Yiğitler Sokak veya Hürriyet Bulvarı durağında inilmelidir.</li>
+        <li><b>78ZB:</b> Fenertepe Peronlar - Zeytinburnu - Yiğitler Sokak veya Hürriyet Bulvarı durağı</li>
 
-        <li><b>98:</b> Fenertepe Peronlar - Bakırköy - Yiğitler Sokak veya Hürriyet Bulvarı durağında inilmelidir.</li>
+        <li><b>98:</b> Fenertepe Peronlar - Bakırköy - Yiğitler Sokak veya Hürriyet Bulvarı durağı</li>
 
-        <li><b>146B:</b> Başakşehir Metrokent - Eminönü - Yiğitler Sokak veya Hürriyet Bulvarı durağında inilmelidir.</li>
+        <li><b>146B:</b> Başakşehir Metrokent - Eminönü - Yiğitler Sokak veya Hürriyet Bulvarı durağı</li>
 
-        <li><b>76O:</b> Cihangir Mahallesi (Avcılar) - Otogar - Yiğitler Sokak veya Hürriyet Bulvarı durağında inilmelidir.</li>
+        <li><b>76O:</b> Cihangir Mahallesi (Avcılar) - Otogar - Yiğitler Sokak veya Hürriyet Bulvarı durağı</li>
 
-        <li><b>78C:</b> Fenertepe Peronlar - Yunus Emre Mahallesi - Başak Konutları veya Dumlupınar Caddesi durağında inilmelidir.</li>
+        <li><b>78C:</b> Fenertepe Peronlar - Yunus Emre Mahallesi - Başak Konutları veya Dumlupınar Caddesi durağı</li>
 
-        <li><b>79E:</b> Kayabaşı Kiptaş Peron - Eminönü - Başak Konutları veya Dumlupınar Caddesi durağında inilmelidir.</li>
+        <li><b>79E:</b> Kayabaşı Kiptaş Peron - Eminönü - Başak Konutları veya Dumlupınar Caddesi durağı</li>
 
-        <li><b>79T:</b> Kayabaşı Kiptaş Peron - Taksim - Başak Konutları veya Dumlupınar Caddesi durağında inilmelidir.</li>
+        <li><b>79T:</b> Kayabaşı Kiptaş Peron - Taksim - Başak Konutları veya Dumlupınar Caddesi durağı</li>
 
-        <li><b>98KM:</b> Fenertepe Peronlar - Metrokent - Başak Konutları veya Dumlupınar Caddesi durağında inilmelidir.</li>
+        <li><b>98KM:</b> Fenertepe Peronlar - Metrokent - Başak Konutları veya Dumlupınar Caddesi durağı</li>
 
-        <li><b>MK19:</b> Ayazma Siteleri - Arenapark - Başak Konutları veya Dumlupınar Caddesi durağında inilmelidir.</li>
+        <li><b>MK19:</b> Ayazma Siteleri - Arenapark - Başak Konutları veya Dumlupınar Caddesi durağı</li>
 
-        <li><b>HVL7:</b> Başakşehir - İstanbul Havalimanı - Başak Konutları durağında inilmelidir.</li>
+        <li><b>HVL7:</b> Başakşehir - İstanbul Havalimanı - Başak Konutları durağı</li>
     </ul>
 
     <h2>Yürüme Mesafesi İpucu</h2>
+
     <p>
         Yiğitler Sokak durağı salonun hemen önündedir
         (1-2 dakika yürüme mesafesi).
@@ -202,45 +288,80 @@ iframe { width: 100%; height: 300px; border-radius: 10px; border: none; }
         indiğinizde ise yaklaşık 5 ila 8 dakikalık kısa
         bir yürüme mesafesi bulunmaktadır.
     </p>
+
 </div>
 
+<!-- BİZ -->
 
 <div class="section">
+
     <h1>Biz</h1>
-    <img src="https://raw.githubusercontent.com/aytenvekadir/aytenkadir.github.io/main/ayten_ve_kadir.jpg" width="80%" style="border-radius:20px;">
+
+    <img src="https://raw.githubusercontent.com/aytenvekadir/aytenkadir.github.io/main/ayten_ve_kadir.jpg"
+         width="80%"
+         style="border-radius:20px;">
+
 </div>
-    
+
 <script>
+
 function startSite() {
+
     const intro = document.getElementById("intro");
+
     intro.style.opacity = "0";
 
     setTimeout(() => {
+
         intro.style.display = "none";
+
         const sections = document.querySelectorAll('.hero, .section');
+
         sections.forEach(sec => sec.classList.add('show'));
+
         document.body.style.overflow = "auto";
         document.body.style.height = "auto";
+
         window.scrollTo(0,0);
+
     }, 500);
 
     document.getElementById("music").play();
+
 }
 
+/* Bölüm animasyonları */
+
 const sections = document.querySelectorAll('.section, .hero');
+
 window.addEventListener('scroll', () => {
+
     sections.forEach(sec => {
+
         const top = sec.getBoundingClientRect().top;
-        if(top < window.innerHeight - 100){
+
+        if(top < window.innerHeight - 100) {
             sec.classList.add('show');
         }
+
     });
+
 });
 
+/* Geri sayım */
+
 const countdown = () => {
+
     const target = new Date("2027-01-23T19:00:00").getTime();
+
     const now = new Date().getTime();
+
     const diff = target - now;
+
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "Mutluluğumuz başladı! ❤️";
+        return;
+    }
 
     const days = Math.floor(diff / (1000*60*60*24));
     const hours = Math.floor((diff / (1000*60*60)) % 24);
@@ -248,8 +369,12 @@ const countdown = () => {
 
     document.getElementById("countdown").innerHTML =
         days + " gün " + hours + " saat " + minutes + " dakika";
-}
+
+};
+
+countdown();
 setInterval(countdown, 1000);
+
 </script>
 
 </body>
